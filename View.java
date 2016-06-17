@@ -1,15 +1,15 @@
 /**
- * Beschreiben Sie hier die Klasse View.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * 
+ * Die View, enthaelt nur das Layout sowie Get-Methoden
+ * 
  */
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 public class View extends JFrame{
-      
+  
     private JPanel pnlLinks = new JPanel();
     private JPanel pnlA = new JPanel();
     private JPanel pnlB = new JPanel();
@@ -23,7 +23,7 @@ public class View extends JFrame{
     private JLabel lblB = new JLabel("B:");
     private JLabel lblC = new JLabel("C:");
     private JLabel lblPunkt = new JLabel("Punkt:");
-    
+    //hier kannste die anfangswerte in die Felder Eingeben
     private JTextField txtAX = new JTextField("150",3);
     private JTextField txtAY = new JTextField("80",3);
     private JTextField txtBX = new JTextField("130",3);
@@ -42,10 +42,9 @@ public class View extends JFrame{
     private JRadioButton rdbEingeben = new JRadioButton("Eingeben, Eingeben");
     private JRadioButton rdbZufall = new JRadioButton("Zufall, Zufall");
     private ButtonGroup gruppe = new ButtonGroup();
- 
-    
+
     /**
-     * Konstruktor für Objekte der Klasse View
+     * Setzt den TitelNamen und baut die GUI
      */
     public View(){
         super("Fluch Des Pharao");
@@ -53,16 +52,17 @@ public class View extends JFrame{
     }
 
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
      * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
+     * Ordnet GUI-Elemente an
+     * 
+     * 
      */
     public void initForm(){
        this.setResizable(false);
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setLayout(new BorderLayout());
-   
+       //hier die Größe des Fensters ändern
+       //Je nach dem wieviel Platz zum Zeichnen da sein soll
        this.setSize(750,500);
        
        pnlLinks.setLayout(new BoxLayout(pnlLinks,BoxLayout.Y_AXIS));
@@ -98,12 +98,10 @@ public class View extends JFrame{
        gruppe.add(rdbStandard);
        gruppe.add(rdbZufall);
        gruppe.add(rdbEingeben);
-       
-       
-      this.pnlLinks.setVisible(true);
-      System.out.println(getAX());
+              
+       this.pnlLinks.setVisible(true);
     }
-
+    //Die Ganzen Getter
     public String getAX(){
         return this.txtAX.getText();
     }
@@ -131,7 +129,7 @@ public class View extends JFrame{
     public String getStep(){
         return this.txtStep.getText();
     }
-    
+    //Die 3 Aktionlistener für die Knöpfe
     public void setStartListener(ActionListener l){
         this.cmdStart.addActionListener(l);
     }
@@ -141,6 +139,22 @@ public class View extends JFrame{
     public void setClearListener(ActionListener l){
         this.cmdClear.addActionListener(l);
     }
+    //Die 3 RadioButtons
+    public boolean getStandard(){
+        return rdbStandard.isSelected();
+    }
+    public boolean getZufall(){
+        return rdbZufall.isSelected();
+    }
+    public boolean getEingeben(){
+        return rdbEingeben.isSelected();
+    }
+    /**
+     * Faerbt die Startknoepfe Gruen oder Rot je nach dem ob die
+     * Eingaben korrekt sind oder nicht
+     * 
+     * @param valid Ob die einstellungen erlaubt sind oder nicht
+     */
     public void farbe(boolean valid){
         System.out.println(valid);
         if(valid){

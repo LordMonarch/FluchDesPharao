@@ -2,18 +2,36 @@
 /**
  * Beschreiben Sie hier die Klasse Model.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * 
+ *  @param rechts Rechte X Grenze der Zeichenfläche
+ *  @param links Linke X Grenze der Zeichenfläche
+ *  @param oben Obere Y Grenze der Zeichenfläche
+ *  @param unten Untere Y Grenze der Zeichenfläche
  */
 
 import java.util.*;
 public class Model 
-{
+{   
+    //Die kannst du noch verändern je nach dem wie groß und wo deine
+    //Zeichenfläche sein soll
     private int rechts = 200;
     private int links = 100;
     private int oben = 50;
     private int unten = 200;
     
+    /**
+     * Prueft ob das Dreieck und der Startpunkt in der 
+     * Zeichenflaeche liegen.
+     * 
+     * @param AX Punkt A die X-Koordinate
+     * @param AY Punkt A die Y-Koordinate
+     * @param BX Punkt B die X-Koordinate
+     * @param BY Punkt B die Y-Koordinate
+     * @param CX Punkt C die X-Koordinate
+     * @param CY Punkt C die Y-Koordinate
+     * @param PX Die X-Koordinate des Startpunktes
+     * @param PY Die Y-Koordinate des Startpunktes
+     */
     public boolean punkteInZeichenebene(int AX, int AY, int BX, int BY, int CX, int CY, int PX, int PY){
         if(AX >= links && AX <= rechts &&
         BX >= links && BX <= rechts &&
@@ -29,7 +47,19 @@ public class Model
         }
         
     }
-    
+    /**
+     * Berechnet ob der Punkt im Dreieck liegt,
+     * mit Hilfe der Gausschen Flaechenformel
+     * 
+     * @param AX Punkt A die X-Koordinate
+     * @param AY Punkt A die Y-Koordinate
+     * @param BX Punkt B die X-Koordinate
+     * @param BY Punkt B die Y-Koordinate
+     * @param CX Punkt C die X-Koordinate
+     * @param CY Punkt C die Y-Koordinate
+     * @param PX Die X-Koordinate des Startpunktes
+     * @param PY Die Y-Koordinate des Startpunktes
+     */
     public boolean punktImDreieck(int AX, int AY, int BX, int BY, int CX, int CY, int PX, int PY){
         int ABC, ABCP, ABPC, APBC;
         
@@ -48,10 +78,28 @@ public class Model
         
         return true;
     }
+    /**
+     * Prueft ob:
+     * 1) Die Eintraege nicht leer sind
+     * 2) Die Eintraege integer sind
+     * 3) Keine Dreieckseckpunkte doppelt auftreten
+     * 4) Der Eintrag des Stepfeldes > 0 ist
+     * 5) Ob der Punkt im Dreieck liegt
+     * 6) Ob alles in der Zeichenflaeche liegt
+     *
+     * @param AX Punkt A die X-Koordinate
+     * @param AY Punkt A die Y-Koordinate
+     * @param BX Punkt B die X-Koordinate
+     * @param BY Punkt B die Y-Koordinate
+     * @param CX Punkt C die X-Koordinate
+     * @param CY Punkt C die Y-Koordinate
+     * @param PunktX Die X-Koordinate des Startpunktes
+     * @param PunktY Die Y-Koordinate des Startpunktes
+     * @param Step Der Eintrag des Step-Feldes
+     */
     
     public boolean isValid(String AX, String AY, String BX, String BY, String CX, String CY, String PunktX, String PunktY, String Step){
         boolean temp = true;
-       
         try{
         try{
         Integer.parseInt(AX);
@@ -80,7 +128,6 @@ public class Model
                
             }else{
                 temp = true;
-              
                 
                 temp = punktImDreieck(Integer.parseInt(AX),Integer.parseInt(AY), 
                 Integer.parseInt(BX),  Integer.parseInt(BY),
@@ -98,7 +145,7 @@ public class Model
         }catch(NumberFormatException e){
             temp = false;
         }
-    }catch(NullPointerException p){
+        }catch(NullPointerException p){
             temp = false;
         }
     

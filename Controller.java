@@ -1,8 +1,9 @@
 /**
- * Beschreiben Sie hier die Klasse Controller.
+ * Der Controller schickt die Eintraege der View
+ * Zum Model was damit rumrechnet und das Ergebnis 
+ * wieder zurück zur View
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * 
  */
 import java.awt.event.*;
 public class Controller{
@@ -11,22 +12,22 @@ public class Controller{
     private boolean valid;
     
     /**
-     * Konstruktor für Objekte der Klasse Controller
+     * erstellt ein Model und ein View
+     * und fügt die ActionListener Hinzu
      */
     public Controller(){
        this._model = new Model();
        this._view = new View();
        addListener();
     }
-
+    
     public void showView(){
         this._view.setVisible(true);
     }
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
+     * Fügt die 3 ActionListener der 3 Knöpfe hinzu
      * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
+     *
      */
     private void addListener(){
         this._view.setStartListener(new StartListener());
@@ -34,7 +35,10 @@ public class Controller{
         this._view.setClearListener(new ClearListener());
        
     }
-    
+    /**
+     * Prueft bei jedem Knopfdruck
+     * ob die Eintraege alle Korrekt sind
+     */
     public void isValidController(){
         this.valid = _model.isValid(_view.getAX(), _view.getAY(), 
             _view.getBX(), _view.getBY(),
@@ -44,7 +48,7 @@ public class Controller{
             
             _view.farbe(valid); 
     }
-    
+    //hier kommen dann die ganzen Aktionen rein
     class StartListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             isValidController();
